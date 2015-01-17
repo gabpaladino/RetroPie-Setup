@@ -1,6 +1,7 @@
 rp_module_id="fbalibretro"
 rp_module_desc="FBA LibretroCore"
 rp_module_menus="2+"
+rp_module_flags="!odroid"
 
 function depends_fbalibretro() {
     getDepends gcc-4.8 g++-4.8

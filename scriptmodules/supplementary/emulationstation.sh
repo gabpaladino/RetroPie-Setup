@@ -11,6 +11,8 @@ function depends_emulationstation() {
     if ! hasPackage libsdl2-dev && isPlatform "rpi"; then
         rp_callModule sdl2 install_bin
     fi
+
+    isPlatform "odroid" && getDepends libsdl2-dev freeglut3-dev libgles1-mesa-dev
 }
 
 function sources_emulationstation() {

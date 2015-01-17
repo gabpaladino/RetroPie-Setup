@@ -75,7 +75,7 @@ function platform_rpi() {
 }
 
 function platform_odroid() {
-    __default_cflags="-O2 -mfpu=neon -march=armv7-a -mfloat-abi=hard"
+    __default_cflags="-O2 -mfpu=neon -march=armv7-a -mfloat-abi=hard -marm"
     __default_asflags=""
     __default_makeflags=""
     __default_gcc_version="4.7"

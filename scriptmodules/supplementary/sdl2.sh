@@ -1,7 +1,7 @@
 rp_module_id="sdl2"
 rp_module_desc="SDL (Simple DirectMedia Layer) v2.x"
 rp_module_menus=""
-rp_module_flags="nobin"
+rp_module_flags="nobin !odroid"
 
 function depends_sdl2() {
     # Depedencies from the debian package control + additional dependencies for the pi (some are excluded like dpkg-dev as they are
@@ -12,12 +12,15 @@ function depends_sdl2() {
 
 function sources_sdl2() {
     wget -O- -q http://downloads.petrockblock.com/retropiearchives/SDL2-2.0.3.tar.gz | tar -xvz --strip-components=1
+    
+    if isPlatform "rpi"; then
     # we need to add the --host due to dh_auto_configure fiddling with the --build parameter which overrides the config.guess. This
     # would cause it not to find the pi gles development files
     sed -i 's/--disable-x11-shared/--disable-x11-shared --host=armv6l-raspberry-linux-gnueabihf --disable-video-opengl --enable-video-gles --disable-esd --disable-pulseaudio/' debian/rules
     # remove pulse / libgl1 dependencies
     sed -i '/libpulse-dev,/d' debian/control
     sed -i '/libgl1-mesa-dev,/d' debian/control
+    fi
 }
 
 function build_sdl2() {
